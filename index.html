@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! ✨ A Special Surprise for You</title>
+    <meta name="description" content="An interactive birthday surprise and digital gift story created with love.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap"
+        rel="stylesheet">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Ambient Particle Background Canvas -->
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+    <!-- Floating Audio Control Pill -->
+    <header class="top-nav">
+        <button id="audio-toggle-btn" class="audio-toggle-btn" aria-label="Toggle background music"
+            title="Toggle Music">
+            <span class="music-icon" id="music-icon">🎵</span>
+            <span class="audio-waves" id="audio-waves">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+            </span>
+            <span class="audio-label" id="audio-label">Music</span>
+        </button>
+    </header>
+
+    <!-- Hidden Background Audio Element -->
+    <audio id="bg-audio" preload="auto" loop>
+        <source src="assets/music/birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Story Container -->
+    <main class="story-container" id="story-container">
+
+        <!-- ==============================================
+             SECTION 1: SECRET KEY ACCESS / INTRO CARD
+             ============================================== -->
+        <section class="scene-card active" id="scene-lock" data-step="1">
+            <div class="scene-content lock-scene-content">
+                <div class="floating-badge">
+                    <span class="sparkle-star">🔒</span>
+                    <span class="badge-text">Secret Birthday Access</span>
+                    <span class="sparkle-star">✨</span>
+                </div>
+
+                <h2 class="scene-title">Hey paithekaree 💛</h2>
+                <p class="interactive-hint">A spcl surprise is locked inside. Enter the secret code to open!</p>
+
+                <!-- Scrapbook Card with Embedded Password Gate Inside Card Image -->
+                <div class="lock-card-wrapper" id="lock-card-wrapper">
+                    <div class="lock-card-frame">
+                        <img src="assets/images/intro-card.jpg" alt="Handcrafted scrapbook card for a wonderful friend"
+                            class="lock-card-img" id="lock-card-img">
+
+                        <!-- Password Entry Positioned Directly Inside Cleared Card Region -->
+                        <div class="lock-card-passcode-overlay" id="lock-card-passcode-overlay">
+                            <div class="card-overlay-title">🗝️ Secret Key</div>
+                            <form id="passcode-form" class="passcode-form" onsubmit="return false;">
+                                <div class="passcode-input-wrapper" id="passcode-input-wrapper">
+                                    <input type="password" id="secret-passcode" class="secret-passcode-input"
+                                        placeholder="Secret code..." autocomplete="off" autocorrect="off"
+                                        autocapitalize="off" spellcheck="false" maxlength="24">
+                                    <button type="button" class="toggle-password-visibility"
+                                        id="toggle-password-visibility" aria-label="Toggle password visibility"
+                                        title="Show / Hide password">
+                                        <span id="toggle-password-icon">👁️</span>
+                                    </button>
+                                </div>
+                                <button type="submit" class="primary-btn unlock-btn" id="passcode-unlock-btn">
+                                    <span>Unlock</span>
+                                    <span class="btn-arrow">💛</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="lock-card-sparkle-halo"></div>
+                    </div>
+                </div>
+
+                <!-- Feedback & Hint Display Area -->
+                <div class="passcode-feedback-area">
+                    <p class="passcode-error-msg" id="passcode-error-msg" aria-live="polite"></p>
+                    <p class="passcode-subtext">hint: only the birthday star knows the secret 🤫✨</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 2: WELCOME / INTRO
+             ============================================== -->
+        <section class="scene-card" id="scene-welcome" data-step="2">
+            <div class="scene-content welcome-content">
+                <div class="floating-badge">
+                    <span class="sparkle-star">✨</span>
+                    <span class="badge-text">A Special Surprise</span>
+                    <span class="sparkle-star">✨</span>
+                </div>
+
+                <div class="hero-illustration">
+                    <div class="polaroid-item welcome-polaroid tilt-left-small">
+                        <div class="tape-strip"></div>
+                        <div class="photo-frame">
+                            <img src="assets/images/photo3.jpg" alt="Unforgettable day" class="polaroid-img">
+                        </div>
+                        <p class="photo-caption">Unforgetable day 🌟</p>
+                    </div>
+                </div>
+
+                <p class="welcome-intro-text">A little surprise created just for you...gop's hu ❣️</p>
+                <h1 class="welcome-title">Happiest bornday da ..!</h1>
+                <h2 class="welcome-subtitle" id="welcome-name-display">My special girl 💛</h2>
+
+                <button class="primary-btn pulse-glow" id="start-story-btn">
+                    <span>Let's begin </span>
+                    <span class="btn-icon">🎁</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 3: BIRTHDAY GREETING
+             ============================================== -->
+        <section class="scene-card" id="scene-greeting" data-step="3">
+            <div class="scene-content">
+                <div class="badge-pill">
+                    <span>✨ Beautiful Day ✨</span>
+                </div>
+
+                <div class="scene-icon-wrapper">
+                    <div class="polaroid-item greeting-polaroid tilt-right-small">
+                        <div class="tape-strip"></div>
+                        <div class="photo-frame">
+                            <img src="assets/images/photo2.jpg" alt="Cute miniature cheek pinch moment"
+                                class="polaroid-img">
+                            <div class="photo-reveal-overlay" role="button" tabindex="0"
+                                aria-label="Tap to reveal photo">
+                                <div class="reveal-badge">
+                                    <span class="reveal-emoji">❤️</span>
+                                    <span class="reveal-label">Tap to reveal ✨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="photo-caption">Moments worth remembering ❤️</p>
+                    </div>
+                </div>
+
+                <h2 class="scene-title">Special day for beautiful soul 💛</h2>
+                <div class="quote-box">
+                    <p class="greeting-message" id="greeting-text-display">
+                        Your existense is someone's favourite reason to smile....never forget it gop's hu💛 !!! 💐..!
+                    </p>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="secondary-btn" id="greeting-prev-btn">← Back</button>
+                    <button class="primary-btn" id="greeting-next-btn">
+                        <span>Keep going</span>
+                        <span class="btn-arrow">❣️</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 4: CAKE & CANDLE
+             ============================================== -->
+        <section class="scene-card" id="scene-cake" data-step="4">
+            <div class="scene-content">
+                <div class="badge-pill">
+                    <span>🎂 Make your Wish</span>
+                </div>
+
+                <!-- Interactive Polaroid Cake Scene with Blowing Flame & Custom Card -->
+                <div class="cake-polaroid-container" id="interactive-cake" role="button" tabindex="0"
+                    title="The little candle is waiting fr ur wishes....blow it out ...🕯️✨ !!">
+                    <div class="polaroid-item cake-polaroid tilt-left-small">
+                        <div class="tape-strip"></div>
+                        <div class="photo-frame cake-photo-frame">
+                            <img src="assets/images/photo1.jpg" alt="Birthday cake with candle" class="polaroid-img">
+
+                            <!-- Interactive Candle Flame Overlay with Gentle Blowing Wisps -->
+                            <div class="photo-candle-flame-wrap" id="birthday-candle">
+                                <div class="photo-flame" id="candle-flame"></div>
+                                <div class="photo-smoke" id="candle-smoke">
+                                    <span class="smoke-puff p1"></span>
+                                    <span class="smoke-puff p2"></span>
+                                    <span class="smoke-puff p3"></span>
+                                    <span class="sparkle-wisp w1">✨</span>
+                                    <span class="sparkle-wisp w2">✨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="photo-caption" id="cake-photo-caption">have a beautiful day ✨</p>
+                    </div>
+                </div>
+
+                <p class="interactive-hint" id="cake-hint">
+                    The little candle is waiting fr ur wishes....blow it out ...🕯️✨ !!
+                </p>
+
+                <h2 class="scene-title-small" id="cake-wish-display">Make a wish... 🎂✨</h2>
+
+                <div class="nav-actions">
+                    <button class="secondary-btn" id="cake-prev-btn">← Back</button>
+                    <button class="primary-btn" id="cake-next-btn">
+                        <span>something awaits </span>
+                        <span class="btn-arrow">🌹</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 5: GIFT BOX
+             ============================================== -->
+        <section class="scene-card" id="scene-gift" data-step="5">
+            <div class="scene-content">
+                <div class="badge-pill">
+                    <span>🎁 Mystery Surprise</span>
+                </div>
+
+                <h2 class="scene-title">My little note for you 🎁</h2>
+                <p class="interactive-hint">Tap pannu da 😂!</p>
+
+                <!-- Realistic Interactive Gift Box -->
+                <div class="gift-scene" id="interactive-gift-box" role="button" tabindex="0"
+                    aria-label="Gift box. Click to unwrap.">
+                    <div class="realistic-gift-wrapper">
+                        <img src="assets/images/gift-box.jpg" alt="Special Birthday Gift Box"
+                            class="realistic-gift-img">
+                        <div class="gift-sparkle-halo"></div>
+
+                        <!-- Inside Surprise Card that pops up when opened -->
+                        <div class="gift-surprise-card" id="gift-surprise-card">
+                            <span class="surprise-icon">✨ 🎁 ✨</span>
+                            <p class="surprise-text" id="gift-reveal-display">
+                                "A little remainder da ..! you deserve all happiness in the world 💛 nee yapavum hpy ha
+                                irukanum,yevlo struggle vanthalum thatti vedu...yapavum solra maare (smile..) 😊
+                                namma kitta tha iruku...🎀. "
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gift-continue-zone" id="gift-continue-zone">
+                    <div class="nav-actions">
+                        <button class="secondary-btn" id="gift-prev-btn">← Back</button>
+                        <button class="primary-btn" id="gift-next-btn">
+                            <span>A msg fr u</span>
+                            <span class="btn-arrow">💖</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 6: ENVELOPE / LETTER
+             ============================================== -->
+        <section class="scene-card" id="scene-envelope" data-step="6">
+            <div class="scene-content">
+                <div class="badge-pill">
+                    <span> 🕊️ Special Delivery 🕊️</span>
+                </div>
+
+                <h2 class="scene-title">There's a letter for u gop's hu..💌</h2>
+                <p class="interactive-hint">Envelope ha click pannu da..! </p>
+
+                <!-- Aesthetic Realistic Envelope Scene -->
+                <div class="envelope-scene-container" id="interactive-envelope" role="button" tabindex="0"
+                    aria-label="Birthday envelope. Tap to open letter.">
+                    <div class="envelope-wrapper" id="envelope-wrapper">
+                        <!-- Envelope Photo with Custom Tag & Wax Seal Glow -->
+                        <div class="envelope-photo-card" id="envelope-photo-card">
+                            <img src="assets/images/envelope.jpg" alt="Aesthetic kraft envelope with twine and wax seal"
+                                class="envelope-photo-img">
+
+                            <!-- Shimmering halo on hover -->
+                            <div class="envelope-sparkle-halo"></div>
+
+                            <!-- Custom Tag Overlay with "A little msg for u da..💛" -->
+                            <div class="envelope-custom-tag" id="envelope-custom-tag"
+                                aria-label="A little msg for u da..💛">
+                                <span class="tag-line tag-l1">A</span>
+                                <span class="tag-line tag-l2">little</span>
+                                <span class="tag-line tag-l3">msg</span>
+                                <span class="tag-line tag-l4">for u</span>
+                                <span class="tag-line tag-l5"> da..💛</span>
+                            </div>
+
+                            <!-- Interactive Wax Seal Hotspot with Sparkle Pulse -->
+                            <div class="envelope-wax-hotspot" id="wax-seal" title="Tap wax seal to open letter">
+                                <span class="wax-pulse-ring"></span>
+                                <span class="wax-sparkle-icon">✨</span>
+                            </div>
+                        </div>
+
+                        <!-- Slide-out Letter Paper -->
+                        <div class="letter-paper" id="letter-paper">
+                            <div class="letter-header">
+                                <span class="letter-stamp">💛</span>
+                                <span class="letter-date">Today</span>
+                            </div>
+                            <div class="letter-body" id="letter-content-display">
+                                <p class="letter-salutation">Dear [NAME],</p>
+                                <p>On ur spcl day, I just want to wish u hpy with beautiful moments and
+                                    everything u deserve ✨.</p>
+                                <p>I always say it.. that u r the spcl person in my life...💛</p>
+                                <p>Keep being urself...you're perfect just the way u r.. 🎀!!</p>
+                                <p></p>
+
+                                <p class="letter-signature">Happy Birthday..ma ! 💛</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="envelope-action-bar">
+                    <button class="action-pill-btn" id="open-letter-btn">
+                        <span>Open Letter ✉️</span>
+                    </button>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="secondary-btn" id="envelope-prev-btn">← Back</button>
+                    <button class="primary-btn" id="envelope-next-btn">
+                        <span>wanna see more 👀</span>
+
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 7: PERSONAL MESSAGE CARDS (PASSWORD PROTECTED)
+             ============================================== -->
+        <section class="scene-card" id="scene-cards" data-step="7">
+            <div class="scene-content cards-scene-content">
+                <div class="badge-pill">
+                    <span>✨ Words For You</span>
+                </div>
+
+                <h2 class="scene-title">Little notes from me...</h2>
+
+                <!-- Password Protected Lock Card for Section 7 -->
+                <div class="section-lock-view" id="cards-lock-view">
+                    <div class="section-lock-card">
+                        <div class="lock-icon-glow">
+                            <span class="lock-emoji">🔒</span>
+                            <div class="lock-sparkle-halo"></div>
+                        </div>
+                        <h3 class="lock-card-title">Personal Notes Locked</h3>
+                        <p class="lock-card-subtitle">Enter the secret password to read these special notes 💛</p>
+
+                        <form id="cards-passcode-form" class="cards-passcode-form" onsubmit="return false;">
+                            <div class="passcode-input-wrapper" id="cards-passcode-input-wrapper">
+                                <input type="password" id="cards-secret-passcode" class="secret-passcode-input"
+                                    placeholder="Secret password..." autocomplete="off" autocorrect="off"
+                                    autocapitalize="off" spellcheck="false" maxlength="30">
+                                <button type="button" class="toggle-password-visibility" id="cards-toggle-password"
+                                    aria-label="Toggle password visibility" title="Show / Hide password">
+                                    <span id="cards-toggle-password-icon">👁️</span>
+                                </button>
+                            </div>
+                            <button type="submit" class="primary-btn unlock-btn" id="cards-unlock-btn">
+                                <span>Unlock Notes</span>
+                                <span class="btn-arrow">✨</span>
+                            </button>
+                        </form>
+
+                        <div class="passcode-feedback-area">
+                            <p class="passcode-error-msg" id="cards-passcode-error-msg" aria-live="polite"></p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unlocked Content: Cards Carousel / Deck (Hidden by default until unlocked) -->
+                <div class="cards-deck-container" id="cards-deck-container" style="display: none;">
+                    <div class="card-display-box" id="message-card-box">
+                        <div class="card-quote-mark">“</div>
+                        <p class="card-current-text" id="card-message-text">
+                            chloo....💝 unna naan expect eh pannala da 👀, aana nee vandha timing mattum perfect 🌼,
+                            yadhuvum plan pannama, slow ah en life-la oru beautiful part aayita..!💛
+                        </p>
+                        <div class="card-footer-accent">
+                            <span class="card-heart">✨</span>
+                        </div>
+                    </div>
+
+                    <!-- Card Switcher Controls -->
+                    <div class="cards-navigation">
+                        <button class="card-nav-btn" id="card-prev-item-btn" aria-label="Previous note">‹</button>
+                        <div class="card-counter" id="card-counter-display">1 / 7</div>
+                        <button class="card-nav-btn" id="card-next-item-btn" aria-label="Next note">›</button>
+                    </div>
+
+                    <!-- Dot indicators (7 dots for 7 cards) -->
+                    <div class="card-dots" id="card-dots-container">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+
+                <!-- Navigation Actions: Enabled to move to next section 8 whether unlocked or not -->
+                <div class="nav-actions">
+                    <button class="secondary-btn" id="cards-prev-btn">← Back</button>
+                    <button class="primary-btn" id="cards-next-btn">
+                        <span>View Moments 👻</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 8: MEMORIES / PHOTOS
+             ============================================== -->
+        <section class="scene-card" id="scene-memories" data-step="8">
+            <div class="scene-content gallery-scene-content">
+                <div class="badge-pill">
+                    <span>📸 Keepsakes</span>
+                </div>
+
+                <h2 class="scene-title">Snaps of the moments..!</h2>
+                <p class="scene-subtitle-text">Glimpses of wonderful times and happy smiles 💛</p>
+
+                <!-- Polaroid / Keepsake Photos Grid -->
+                <div class="polaroid-grid memory-gallery-grid" id="polaroid-grid">
+                    <!-- Photo 1 (Swapped: Baby photo) -->
+                    <div class="polaroid-item memory-card">
+                        <div class="photo-frame">
+                            <img src="assets/images/memory1.jpg" alt="Precious childhood portrait in natural color"
+                                class="polaroid-img" style="object-position: center 15%;" loading="lazy">
+                            <div class="photo-reveal-overlay" role="button" tabindex="0"
+                                aria-label="Tap to reveal photo">
+                                <div class="reveal-badge">
+                                    <span class="reveal-emoji">🌸</span>
+                                    <span class="reveal-label">Tap to reveal ✨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="photo-caption" id="caption-1">Sweetest little beginnings 🌸</p>
+                    </div>
+
+                    <!-- Photo 2 (Swapped: Lake photo) -->
+                    <div class="polaroid-item memory-card">
+                        <div class="photo-frame">
+                            <img src="assets/images/memory2.jpg" alt="Radiant smile by the waters" class="polaroid-img"
+                                style="object-position: center 25%;" loading="lazy">
+                            <div class="photo-reveal-overlay" role="button" tabindex="0"
+                                aria-label="Tap to reveal photo">
+                                <div class="reveal-badge">
+                                    <span class="reveal-emoji">💛</span>
+                                    <span class="reveal-label">Tap to reveal ✨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="photo-caption" id="caption-2">Radiant smile & sunshine 💛</p>
+                    </div>
+
+                    <!-- Photo 3 (Sweet Moments Holding Baby) -->
+                    <div class="polaroid-item memory-card">
+                        <div class="photo-frame">
+                            <img src="assets/images/memory3.jpg" alt="Sweet moment holding cute baby with warm smiles"
+                                class="polaroid-img" style="object-position: center 20%;" loading="lazy">
+                            <div class="photo-reveal-overlay" role="button" tabindex="0"
+                                aria-label="Tap to reveal photo">
+                                <div class="reveal-badge">
+                                    <span class="reveal-emoji">✨</span>
+                                    <span class="reveal-label">Tap to reveal ✨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="photo-caption" id="caption-3">Sweetest bonds & warm smiles ✨</p>
+                    </div>
+
+                    <!-- Photo 4 (Colorized Side Profile Braid Portrait) -->
+                    <div class="polaroid-item memory-card">
+                        <div class="photo-frame">
+                            <img src="assets/images/memory4.jpg" alt="Graceful portrait with braid and jhumkas"
+                                class="polaroid-img" style="object-position: center 20%;" loading="lazy">
+                            <div class="photo-reveal-overlay" role="button" tabindex="0"
+                                aria-label="Tap to reveal photo">
+                                <div class="reveal-badge">
+                                    <span class="reveal-emoji">💫</span>
+                                    <span class="reveal-label">Tap to reveal ✨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="photo-caption" id="caption-4">Grace, charm & beauty 💫</p>
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="secondary-btn" id="memories-prev-btn">← Back</button>
+                    <button class="primary-btn pulse-glow" id="memories-next-btn">
+                        <span>Extra spcl 🎉</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SECTION 9: FINAL CELEBRATION...
+             
+             ============================================== -->
+        <section class="scene-card" id="scene-celebration" data-step="9">
+            <div class="scene-content celebration-content">
+                <!-- Floating celebration balloons -->
+                <div class="floating-balloons-bg" aria-hidden="true">
+                    <span class="balloon balloon-1">🎈</span>
+                    <span class="balloon balloon-2">🎈</span>
+                    <span class="balloon balloon-3">🎈</span>
+                    <span class="balloon balloon-4">🎈</span>
+                    <span class="balloon balloon-5">🎈</span>
+                </div>
+
+                <div class="celebration-badge">
+                    <span>👑I hope u like this👑</span>
+                </div>
+
+                <!-- Custom Final Golden Greeting Card -->
+                <div class="final-card-container">
+                    <div class="final-card-frame">
+                        <img src="assets/images/final-card.jpg"
+                            alt="No matter where ever life takes us, I'll be always there fr u. Happiest Bornday paithekaree 😁 ..!!"
+                            class="final-card-img" loading="lazy">
+                        <div class="final-card-glow-halo"></div>
+                    </div>
+                </div>
+
+                <div class="celebration-elements">
+                    <span class="cel-icon float-1">🎂</span>
+                    <span class="cel-icon float-2">✨</span>
+                    <span class="cel-icon float-3">🌼</span>
+                    <span class="cel-icon float-4">🎁</span>
+                    <span class="cel-icon float-5">🌟</span>
+                    <span class="cel-icon float-5">💛</span>
+                </div>
+
+                <div class="celebration-actions">
+                    <button class="replay-btn" id="replay-btn">
+                        <span>wanna replay again </span>
+                        <span class="btn-icon">🔄</span>
+                    </button>
+                    <button class="action-pill-btn" id="fire-confetti-btn">
+                        <span>More Confetti! 🎊</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Note -->
+    <footer class="app-footer">
+        <p>Made by gughan ✨ & Warm Wishes💛</p>
+    </footer>
+
+    <!-- Main Application Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
